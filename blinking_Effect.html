@@ -1,0 +1,48 @@
+<html>
+<head>
+	<style>
+        .header {
+            text-align: center;
+            animation: blink 4s steps(5, start) infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+		option {
+			font-family: courier;
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<div class="header">
+			<h1>Display Capital</h1>
+		</div>
+		<center>
+			<div class="container">
+				<p>Select Country :</p>
+				<select name="" id="country" onchange="showCapital()">
+					<option value=""> SELECT COUNTRY </option>
+					<option value="Delhi">India</option>
+					<option value="Kiev">Ukraine</option>
+					<option value="Paris">France</option>
+					<option value="Berlin">Germany</option>
+					<option value="London">UK</option>
+				</select>
+
+				<p id="capital" style="color:palevioletred"></p>
+			</div>
+
+			<script>
+				function showCapital() {
+					var country = document.getElementById("country");
+					var capital = document.getElementById("capital");
+					capital.innerText = country.value ? "Capital: " + country.value : "";
+				}
+			</script>
+		</center>
+</body>
+</html>
