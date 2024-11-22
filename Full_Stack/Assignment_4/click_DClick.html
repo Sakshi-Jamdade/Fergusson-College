@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click and Double-Click Events</title>
+    <!-- Include jQuery from CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            let clickTimer;
+            
+            $("p").on("click", function () {
+                clearTimeout(clickTimer);
+                clickTimer = setTimeout(function() {
+                    $("body").append('<p>This is a click Event</p>');
+                }, 300);
+            });
+
+            $("p").on("dblclick", function () {
+                clearTimeout(clickTimer);
+                $("body").append('<p>This is a double-click Event</p>');
+            });
+        });
+    </script>
+</head>
+<body>
+    <p>Click me!</p>
+</body>
+</html>

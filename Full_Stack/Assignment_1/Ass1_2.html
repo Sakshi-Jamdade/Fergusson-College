@@ -1,0 +1,42 @@
+<html>
+<body>
+	<label for="ay">Day : </label>
+	<select id="day" name="day">
+	<option value="">Day</option>
+	<script>
+		for(let i=1;i<=31;i++)
+		{
+			document.write('<option value="+i+">'+i+'</option>');
+		}
+	</script>	
+	</select>&ensp;
+
+	Month : <select id="month" name="mon">
+		<option value="January">January</option>		
+		<option value="February">February</option>
+		<option value="March">March</option>
+		<option value="April">April</option>
+		<option value="May">May</option>
+		<option value="June">June</option>
+		<option value="July">July</option>
+		<option value="August">August</option>
+		<option value="September">September</option>
+		<option value="October">October</option>
+		<option value="November">November</option>
+		<option value="December">December</option>
+	</select>&ensp;
+
+	Year : <select id="year">
+	<script>
+		for(let i=1995;i<=2010;i++)
+		{
+			document.write('<option value="+i+">'+i+'</option>');
+		}
+	</script>	
+	</select>
+
+
+
+
+</body>
+</html>

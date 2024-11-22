@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add List Element</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $("#addItem").click(function() {
+        $("ul").append("<li>New List Item</li>");
+      });
+    });
+  </script>
+</head>
+<body>
+  <h2>Unordered List</h2>
+  <ul>
+    <li>Item 1</li>
+    <li>Item 2</li>
+  </ul>
+  <button id="addItem">Add List Item</button>
+</body>
+</html>

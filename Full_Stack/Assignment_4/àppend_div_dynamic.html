@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Append Div Example</title>
+    <!-- Include jQuery from CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#btnAppendDiv").click(function () {
+                $("body").append('<div><h1>JQuery Core</h1></div>');
+            });
+        });
+    </script>
+</head>
+<body>
+    <button id="btnAppendDiv">Append Div</button>
+</body>
+</html>

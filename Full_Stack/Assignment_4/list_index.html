@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        ul {
+            list-style-type: none; /* Removes the default square bullets */
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $("#btnMagic").click(function (e) { 
+                e.preventDefault();
+                $("#ulList").append("<li>jq added item</li>");    
+                addIndexTags();
+            });
+
+            function addIndexTags() {
+                $("#ulList li .indexTag").remove();
+                
+                $("#ulList li").each(function(index) {
+                    $(this).prepend("<span class='indexTag'>" + (index + 1) + ". </span>");
+                });
+            }
+
+            addIndexTags();
+        });
+    </script>
+</head>
+<body>
+    <button id="btnMagic">Click Here</button>
+    <ul id="ulList">
+        <li>item a</li>
+        <li>item b</li>
+        <li>item c</li>
+    </ul>
+</body>
+</html>

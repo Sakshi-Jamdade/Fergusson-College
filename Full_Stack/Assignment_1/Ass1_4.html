@@ -1,0 +1,81 @@
+<!-- <html>
+<head>
+<style>
+#abc
+{
+	height:100px;
+	width:150px;
+	border :1px solid black;
+	position:relative;
+}
+#drag1
+{
+	height:100px;
+	width:150px;
+}
+</style>
+
+<script>
+function allowDrop(ev)
+{
+	ev.preventDefault();
+}
+function drag(ev)
+{
+	ev.dataTransfer.setData("text",ev.target.id);
+}
+function drop(ev)
+{
+	ev.preventDefault();
+	var data=ev.dataTransfer.getData("text");
+	ev.target.appendChild(document.getElementById(data));
+}
+
+</script>
+</head>
+<body>
+	<div id="abc" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+	<img src="s.jpg" id="drag1" draggable="true" ondragstart="drag(event)" />
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html>
+	<head>	
+		<meta  charset="utf-8">
+		<title>Assignment 2 Ex 3</title>
+		<style>
+			#box{
+				border:1px solid black;
+				width:500px;
+				height:200px;
+			}
+			#image{
+				border:1px solid blue;
+				width:300px;
+				height:150px;
+				margin:10px;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<div id="box" ondrop="drop(event)" ondragover="allowDrop(event)">
+		</div>
+
+		<img src="ssc.png" id="image" draggable="true" ondragstart="drag(event)"/>
+
+		<script>
+			function allowDrop(event){
+				event.preventDefault();
+			}
+			function drop(event){
+				event.target.appendChild(document.getElementById("image"));
+			}
+			function drag(event){
+				event.dataTransfer.setData("text",event.target.id);
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        table {
+            width: 60%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .product-info {
+            display: none;
+            margin-top: 10px;
+            font-style: italic;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <table>
+        <caption><strong>Information Table</strong></caption>
+        <tr>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Details</th>
+        </tr>
+        <tr>
+            <td>PC</td>
+            <td>54000</td>
+            <td>
+                <button onclick="toggleInfo('pc-info')">Know More</button>
+                <div id="pc-info" class="product-info">
+                    PC: A high-performance computer with 16GB RAM, 1TB SSD storage, and a 15-inch screen.
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>iPad</td>
+            <td>54000</td>
+            <td>
+                <button onclick="toggleInfo('ipad-info')">Know More</button>
+                <div id="ipad-info" class="product-info">
+                    iPad: A tablet with a 10.2-inch screen, 128GB storage, and an A14 Bionic chip.
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>iPhone</td>
+            <td>54000</td>
+            <td>
+                <button onclick="toggleInfo('iphone-info')">Know More</button>
+                <div id="iphone-info" class="product-info">
+                    iPhone: Latest model with 128GB storage, A15 Bionic chip, and 5G connectivity.
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Laptop</td>
+            <td>54000</td>
+            <td>
+                <button onclick="toggleInfo('laptop-info')">Know More</button>
+                <div id="laptop-info" class="product-info">
+                    Laptop: 15-inch laptop with Intel Core i7, 16GB RAM, and 512GB SSD.
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <script>
+        // Function to toggle the visibility of the product information
+        function toggleInfo(infoId) {
+            var infoDiv = document.getElementById(infoId);
+            
+            // Toggle the display of the product info div
+            if (infoDiv.style.display === "none" || infoDiv.style.display === "") {
+                infoDiv.style.display = "block";
+            } else {
+                infoDiv.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>
