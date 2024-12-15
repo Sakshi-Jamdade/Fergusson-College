@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - 0/1 Knapsack Problem</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Basic Styles for the page */
+        body 
+        {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f0f4f8, #e0e7ff); 
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #7b3f9b, #5d2b86);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 1.5rem; 
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); 
+            border-radius: 8px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar h1 {
+            font-size: 1.5rem;
+            color: #fff;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .navbar ul {
+            display: flex;
+            list-style-type: none;
+        }
+
+        .navbar ul li {
+            margin-left: 1.5rem;
+        }
+
+        .navbar ul li a {
+            color: #f1f1f1;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #ff4081;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .container {
+            background: linear-gradient(135deg, #f0f4f8, #e0e7ff); 
+            width: 80%;
+            margin: 0 auto;
+            padding-top: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        h3 {
+            color: #333;
+            margin-top: 30px;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            overflow-x: hidden;
+        }
+
+        ol {
+            margin-left: 20px;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        .key-takeaways {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .key-takeaways li {
+            margin: 10px 0;
+        }
+
+        .applications {
+            margin-top: 30px;
+            font-style: italic;
+        }
+
+       /* Footer Styles */
+        footer {
+            background: linear-gradient(135deg, #7b3f9b, #5d2b86); /* Same gradient as the navbar */
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-top: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            border-radius: 8px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+<body>
+
+        <nav class="navbar">
+            <h1>Dynamic Programming</h1>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="About_Page.html">About</a></li>
+                <li><a href="implementation.html">Implementation</a></li>
+                
+            </ul>
+            
+        </nav>
+
+    <div class="container">
+        <h2>0/1 Knapsack Problem - Theory</h2>
+        <p>
+            The 0/1 Knapsack problem is a well-known problem in optimization, where you have to select a subset of items such that the total weight is less than or equal to the given capacity of the knapsack, and the total profit is maximized. Each item has a weight and a profit, and you must decide whether to include each item in the knapsack (0 means excluding, 1 means including).
+        </p>
+
+        <h3>Problem Definition</h3>
+        <p>
+            You are given a set of <strong>n</strong> items, each with a weight <strong>w[i]</strong> and a profit <strong>p[i]</strong>. You have a knapsack with a capacity <strong>W</strong>. Your task is to determine the maximum profit that can be obtained by selecting a subset of items such that the total weight does not exceed <strong>W</strong> and the total profit is maximized.
+        </p>
+        
+        <h3>Dynamic Programming Approach</h3>
+        <p>
+            The 0/1 Knapsack problem is solved efficiently using dynamic programming. We define a DP table where each entry <strong>dp[i][w]</strong> represents the maximum profit that can be obtained by considering the first <strong>i</strong> items and a knapsack capacity of <strong>w</strong>.
+        </p>
+        
+        <h3>Steps to Solve</h3>
+        <ol>
+            <li><strong>Initialization</strong>: Initialize a DP table of size <strong>n+1</strong> and <strong>W+1</strong>, where all entries are set to 0.</li>
+            <li><strong>Recurrence Relation</strong>: For each item <strong>i</strong> and capacity <strong>w</strong>, if the weight of the item is less than or equal to <strong>w</strong>, we have two choices:
+                <ul>
+                    <li>Exclude the item: <strong>dp[i][w] = dp[i-1][w]</strong></li>
+                    <li>Include the item: <strong>dp[i][w] = max(dp[i-1][w], p[i-1] + dp[i-1][w - w[i-1]])</strong></li>
+                </ul>
+            </li>
+            <li><strong>Base Case</strong>: The profit is 0 when there are no items or when the capacity is 0: <strong>dp[0][w] = 0</strong> for all <strong>w</strong>.</li>
+            <li><strong>Final Solution</strong>: The value at <strong>dp[n][W]</strong> will give the maximum profit.</li>
+        </ol>
+        
+        <h3>Example Walkthrough</h3>
+        <p>
+            Let’s consider an example with 3 items:
+            <br>
+            - Weights: [2, 3, 4] <br>
+            - Profits: [3, 4, 5] <br>
+            - Knapsack Capacity: 5 <br>
+            
+            The DP table will be filled as follows (we will compare two options: including or excluding each item):
+        </p>
+
+        <pre>
+        | Capacity | 0 | 1 | 2 | 3 | 4 | 5 |
+        |----------|---|---|---|---|---|---|
+        | Item 1   | 0 | 0 | 3 | 3 | 3 | 3 |
+        | Item 2   | 0 | 0 | 3 | 4 | 4 | 7 |
+        | Item 3   | 0 | 0 | 3 | 4 | 5 | 7 |
+        </pre>
+
+        <h3>Key Takeaways</h3>
+        <ul class="key-takeaways">
+            <li>The problem is solved using dynamic programming by building a DP table based on whether or not an item is included.</li>
+            <li>We maximize the profit while keeping the total weight under the given knapsack capacity.</li>
+            <li>The time complexity of this solution is <strong>O(nW)</strong>, where <strong>n</strong> is the number of items and <strong>W</strong> is the knapsack capacity.</li>
+        </ul>
+        
+        <h3>Applications</h3>
+        <p class="applications">
+            The 0/1 Knapsack problem has various applications in real-life scenarios such as resource allocation, cargo loading, and investment decision-making.
+        </p>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Dynamic Programming. All rights reserved.</p>
+    </footer>
+</body>
+</html>

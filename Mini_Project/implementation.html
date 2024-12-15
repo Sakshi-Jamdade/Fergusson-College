@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Implementation - 0/1 Knapsack</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8, #e0e7ff);
+            color: #333;
+        }
+
+        
+        .navbar {
+            background: linear-gradient(135deg, #7b3f9b, #5d2b86);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            border-radius: 8px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar h1 {
+            font-size: 1.8rem;
+            color: #fff;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .navbar ul {
+            display: flex;
+            list-style-type: none;
+        }
+
+        .navbar ul li {
+            margin-left: 1.5rem;
+        }
+
+        .navbar ul li a {
+            color: #f1f1f1;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #ff4081;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .container {
+            width: 80%;
+            margin: 40px auto;
+            background: linear-gradient(135deg, #f0f4f8, #e0e7ff); 
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .button-container button {
+            background-color: #ff4081;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1rem;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .button-container button:hover {
+            background-color: #f50057;
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Code Container */
+        .code-container {
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            white-space: pre-wrap;
+        }
+
+        footer {
+            background: linear-gradient(135deg, #7b3f9b, #5d2b86);
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 40px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <h1>Dynamic Programming</h1>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="About_Page.html">About</a></li>
+            <li><a href="implementation.html">Implementation</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2>Implementation of 0/1 Knapsack</h2>
+
+        <div class="button-container">
+            <button id="btn-c" onclick="showCode('c')">C</button>
+            <button id="btn-cpp" onclick="showCode('cpp')">C++</button>
+            <button id="btn-java" onclick="showCode('java')">Java</button>
+            <button id="btn-py" onclick="showCode('python')">Python</button>
+        </div>
+
+        <div id="code-c" class="code-container" style="display: block;">
+            <pre>
+                #include &lt;stdio.h&gt;
+
+                int max(int a, int b) { return (a > b) ? a : b; }
+
+                void knapsack(int W, int n, int wt[], int val[]) 
+                {
+                    int dp[n + 1][W + 1];
+                    for (int i = 0; i <= n; i++) 
+                    {
+                        for (int w = 0; w <= W; w++) 
+                        {
+                            if (i == 0 || w == 0)
+                                dp[i][w] = 0;
+                            else if (wt[i - 1] <= w)
+                                dp[i][w] = max(val[i - 1] + dp[i - 1][w - wt[i - 1]], dp[i - 1][w]);
+                            else
+                                dp[i][w] = dp[i - 1][w];
+                        }
+                    }
+                    printf("Maximum Profit: %d\\n", dp[n][W]);
+                }
+
+                int main() 
+                {
+                    int W = 50, wt[] = {10, 20, 30}, val[] = {60, 100, 120};
+                    int n = sizeof(val) / sizeof(val[0]);
+                    knapsack(W, n, wt, val);
+                    return 0;
+                }
+            </pre>
+        </div>
+
+        <div id="code-cpp" class="code-container" style="display: none;">
+            <pre>
+                #include &lt;iostream&gt;
+                #include &lt;vector&gt;
+                using namespace std;
+
+                int knapsack(int W, vector&lt;int&gt; wt, vector&lt;int&gt; val, int n) 
+                {
+                    vector&lt;vector&lt;int&gt;&gt; dp(n+1, vector&lt;int&gt;(W+1, 0));
+
+                    for (int i = 1; i &lt;= n; i++) 
+                    {
+                        for (int w = 1; w &lt;= W; w++) 
+                        {
+                            if (wt[i-1] &lt;= w)
+                                dp[i][w] = max(val[i-1] + dp[i-1][w-wt[i-1]], dp[i-1][w]);
+                            else
+                                dp[i][w] = dp[i-1][w];
+                        }
+                    }
+                    return dp[n][W];
+                }
+
+                int main() 
+                {
+                    int W = 50;
+                    vector&lt;int&gt; wt = {10, 20, 30};
+                    vector&lt;int&gt; val = {60, 100, 120};
+                    int n = wt.size();
+                    cout &lt;&lt; "Maximum Profit: " &lt;&lt; knapsack(W, wt, val, n) &lt;&lt; endl;
+                    return 0;
+                }
+            </pre>
+        </div>
+
+        <div id="code-java" class="code-container" style="display: none;">
+            <pre>
+                public class Knapsack 
+                {
+                    static int knapsack(int W, int[] wt, int[] val, int n) 
+                    {
+                        int[][] dp = new int[n + 1][W + 1];
+                        for (int i = 0; i &lt;= n; i++) 
+                        {
+                            for (int w = 0; w &lt;= W; w++) 
+                            {
+                                if (i == 0 || w == 0)
+                                    dp[i][w] = 0;
+                                else if (wt[i - 1] &lt;= w)
+                                    dp[i][w] = Math.max(val[i - 1] + dp[i - 1][w - wt[i - 1]], dp[i - 1][w]);
+                                else
+                                    dp[i][w] = dp[i - 1][w];
+                            }
+                        }
+                        return dp[n][W];
+                    }
+
+                    public static void main(String[] args) 
+                    {
+                        int W = 50;
+                        int[] wt = {10, 20, 30};
+                        int[] val = {60, 100, 120};
+                        int n = wt.length;
+                        System.out.println("Maximum Profit: " + knapsack(W, wt, val, n));
+                    }
+                }
+            </pre>
+        </div>
+
+        <div id="code-python" class="code-container" style="display: none;">
+            <pre>
+                def knapsack(W, wt, profit, n):
+                    dp = [[0 for _ in range(W + 1)] for _ in range(n + 1)]
+
+                    for i in range(n + 1):
+                        for w in range(W + 1):
+                            if i == 0 or w == 0:
+                                dp[i][w] = 0
+                            elif wt[i - 1] &lt;= w:
+                                dp[i][w] = max(profit[i - 1] + dp[i - 1][w - wt[i - 1]], dp[i - 1][w])
+                            else:
+                                dp[i][w] = dp[i - 1][w]
+
+                    return dp[n][W]
+
+                # Example usage
+                W = 50
+                wt = [10, 20, 30]
+                profit = [60, 100, 120]
+                n = len(wt)
+                print("Maximum Profit:", knapsack(W, wt, profit, n))
+            </pre>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Dynamic Programming. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function showCode(language) 
+        {
+            document.getElementById('code-c').style.display = 'none';
+            document.getElementById('code-cpp').style.display = 'none';
+            document.getElementById('code-java').style.display = 'none';
+            document.getElementById('code-python').style.display = 'none';
+            
+            document.getElementById('code-' + language).style.display = 'block';
+        }
+
+        window.onload = function() 
+        {
+            showCode('c');
+        };
+    </script>
+</body>
+</html>
