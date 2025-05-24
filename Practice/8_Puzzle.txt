@@ -1,0 +1,43 @@
+# Goal state
+goal = [[1, 2, 3], [4, 5, 6], [7, 8, 0]]
+
+def h(puzzle):
+    # Count of misplaced tiles
+    return sum(puzzle[i][j] != goal[i][j] for i in range(3) for j in range(3))
+
+def hill_climb(puzzle):
+    while True:
+        print("\nCurrent State (h={}):".format(h(puzzle)))
+        for row in puzzle:
+            print(row)
+        if h(puzzle) == 0:
+            return puzzle  # Goal reached
+
+        # Locate blank tile (0)
+        zero = next((i, j) for i in range(3) for j in range(3) if puzzle[i][j] == 0)
+
+        # Generate all valid moves
+        moves = []
+        for di, dj in [(-1,0), (1,0), (0,-1), (0,1)]:
+            ni, nj = zero[0] + di, zero[1] + dj
+            if 0 <= ni < 3 and 0 <= nj < 3:
+                new = [row.copy() for row in puzzle]
+                new[zero[0]][zero[1]], new[ni][nj] = new[ni][nj], new[zero[0]][zero[1]]
+                moves.append((h(new), new))
+
+        # Pick the best move
+        best_h, best_move = min(moves, key=lambda x: x[0])
+        if best_h >= h(puzzle):
+            print("\nNo better move found. Stuck!")
+            return puzzle
+        puzzle = best_move
+
+# Initial state (1 move from goal)
+puzzle = [[1, 2, 3], [4, 5, 6], [7, 0, 8]]
+solution = hill_climb(puzzle)
+
+print("\nFinal State:")
+for row in solution:
+    print(row)
+
+print("\nSolved!" if h(solution) == 0 else "Stuck!")
